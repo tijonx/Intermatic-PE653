@@ -3,7 +3,6 @@
  *
  *  Original Copyright 2014 bigpunk6
  *  Updated 2017 KeithR26
- *  Updated 2018 tijonx
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  *  in compliance with the License. You may obtain a copy of the License at:
@@ -37,10 +36,9 @@
  *	2.04	05/07/2017	KeithR26	Allow negative temperature offsets. Limit offets to +/- 5 (max supported by PE653)
  *  2.05	05/13/2017  KeithR26	Debug version for Android. Never committed to master
  *  2.06    05/13/2017  KeithR26	Update to fix Temperature display on Android
- *          2018-05-26  Tijonx      Removed default values
 */
 metadata {
-	definition (name: "Intermatic PE653 Pool Control System", author: "KeithR26") {
+	definition (name: "Intermatic PE653 Pool Control System", author: "KeithR26", namespace:  "KeithR26") {
         capability "Actuator"
 		capability "Switch"
 		capability "Polling"
