@@ -3,6 +3,7 @@
  *
  *  Original Copyright 2014 bigpunk6
  *  Updated 2017 KeithR26
+ *  Updated 2018 tijonx
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  *  in compliance with the License. You may obtain a copy of the License at:
@@ -36,9 +37,10 @@
  *	2.04	05/07/2017	KeithR26	Allow negative temperature offsets. Limit offets to +/- 5 (max supported by PE653)
  *  2.05	05/13/2017  KeithR26	Debug version for Android. Never committed to master
  *  2.06    05/13/2017  KeithR26	Update to fix Temperature display on Android
+ *          2018-05-26  Tijonx      Removed default values
 */
 metadata {
-	definition (name: "Intermatic PE653 Pool Control System", author: "KeithR26", namespace:  "KeithR26") {
+	definition (name: "Intermatic PE653 Pool Control System", author: "KeithR26") {
         capability "Actuator"
 		capability "Switch"
 		capability "Polling"
@@ -152,45 +154,45 @@ metadata {
                      "13":"13 minute",
                      "14":"14 minute",
                      "15":"15 minute"]
-		input "tempOffsetwater", "number", title: "Water temperature offset", range: "-5..5", defaultValue: 0, required: true
+		input "tempOffsetwater", "number", title: "Water temperature offset", range: "-5..5",  required: true
         input "tempOffsetair", "number",
-            title: "Air temperature offset - Sets the Offset of the air temerature for the add-on Thermometer in degrees Fahrenheit -5F to +5F", range: "-5..5", defaultValue: 0, required: true
+            title: "Air temperature offset - Sets the Offset of the air temerature for the add-on Thermometer in degrees Fahrenheit -5F to +5F", range: "-5..5",  required: true
         input "debugLevel", "enum", title: "Debug Level", multiple: "true",
         	options:[0:"Off",
             		 1:"Low",
-                     2:"High"], defaultvalue: 0
+                     2:"High"]
         input "ZWdelay", "number",
-            title: "Delay between Z-Wave commands sent (milliseconds). Suggest 1000.", defaultValue: 1000, required: true
+            title: "Delay between Z-Wave commands sent (milliseconds). Suggest 1000.",  required: true
 //Mode 1
-        input "M1Label", "text", title: "M1: Display Name:", defaultValue: ""
-        input "M1Sw1", "enum", title: "M1: Circuit 1 action:", defaultValue: 0,
+        input "M1Label", "text", title: "M1: Display Name:"
+        input "M1Sw1", "enum", title: "M1: Circuit 1 action:", 
         	options:[0:"No Change",
             		 1:"On",
             		 2:"Off"]
-        input "M1Sw2", "enum", title: "M1: Circuit 2 action:", defaultValue: 0,
+        input "M1Sw2", "enum", title: "M1: Circuit 2 action:", 
         	options:[0:"No Change",
             		 1:"On",
             		 2:"Off"]
-        input "M1Sw3", "enum", title: "M1: Circuit 3 action:", defaultValue: 0,
+        input "M1Sw3", "enum", title: "M1: Circuit 3 action:", 
         	options:[0:"No Change",
             		 1:"On",
             		 2:"Off"]
-        input "M1Sw4", "enum", title: "M1: Circuit 4 action:", defaultValue: 0,
+        input "M1Sw4", "enum", title: "M1: Circuit 4 action:", 
         	options:[0:"No Change",
             		 1:"On",
             		 2:"Off"]
-        input "M1Sw5", "enum", title: "M1: Circuit 5 action:", defaultValue: 0,
+        input "M1Sw5", "enum", title: "M1: Circuit 5 action:", 
         	options:[0:"No Change",
             		 1:"On",
             		 2:"Off"]
-        input "M1Mode", "enum", title: "M1: Mode to change to:", defaultValue: 0,
+        input "M1Mode", "enum", title: "M1: Mode to change to:", 
         	options:[0:"No change",
             		 1:"Pool",
                      2:"Pool & Set Temperature",
             		 3:"Spa",
                      4:"Spa & Set Temperature"]
-        input "M1Temp", "number", title: "M1: Set Temperature to:", range: "40..104", defaultValue: 40
-        input "M1VSP", "enum", title: "M1: Set VSP Speed to:", defaultValue: 0,
+        input "M1Temp", "number", title: "M1: Set Temperature to:", range: "40..104"
+        input "M1VSP", "enum", title: "M1: Set VSP Speed to:", 
         	options:[5:"No change",
             		 1:"Speed 1",
             		 2:"Speed 2",
@@ -198,35 +200,35 @@ metadata {
                      4:"Speed 4",
                      0:"Turn off"]
 //Mode 2
-        input "M2Label", "text", title: "M2: Display Name:", defaultValue: ""
-		input "M2Sw1", "enum", title: "M2: Circuit 1 action:", defaultValue: 0,
+        input "M2Label", "text", title: "M2: Display Name:"
+		input "M2Sw1", "enum", title: "M2: Circuit 1 action:", 
         	options:[0:"No Change",
             		 1:"On",
             		 2:"Off"]
-        input "M2Sw2", "enum", title: "M2: Circuit 2 action:", defaultValue: 0,
+        input "M2Sw2", "enum", title: "M2: Circuit 2 action:", 
         	options:[0:"No Change",
             		 1:"On",
             		 2:"Off"]
-        input "M2Sw3", "enum", title: "M2: Circuit 3 action:", defaultValue: 0,
+        input "M2Sw3", "enum", title: "M2: Circuit 3 action:", 
         	options:[0:"No Change",
             		 1:"On",
             		 2:"Off"]
-        input "M2Sw4", "enum", title: "M2: Circuit 4 action:", defaultValue: 0,
+        input "M2Sw4", "enum", title: "M2: Circuit 4 action:", 
         	options:[0:"No Change",
             		 1:"On",
             		 2:"Off"]
-        input "M2Sw5", "enum", title: "M2: Circuit 5 action:", defaultValue: 0,
+        input "M2Sw5", "enum", title: "M2: Circuit 5 action:", 
         	options:[0:"No Change",
             		 1:"On",
             		 2:"Off"]
-        input "M2Mode", "enum", title: "M2: Mode to change to:", defaultValue: 0,
+        input "M2Mode", "enum", title: "M2: Mode to change to:", 
         	options:[0:"No change",
             		 1:"Pool",
                      2:"Pool & Set Temperature",
             		 3:"Spa",
                      4:"Spa & Set Temperature"]
-        input "M2Temp", "number", title: "M2: Set Temperature to:", range: "40..104", defaultValue: 40
-        input "M2VSP", "enum", title: "M2: Set VSP Speed to:", defaultValue: 0,
+        input "M2Temp", "number", title: "M2: Set Temperature to:", range: "40..104"
+        input "M2VSP", "enum", title: "M2: Set VSP Speed to:", 
         	options:[5:"No change",
             		 1:"Speed 1",
             		 2:"Speed 2",
@@ -234,35 +236,35 @@ metadata {
                      4:"Speed 4",
                      0:"Turn off"]
 //Mode 3
-        input "M3Label", "text", title: "M3: Display Name:", defaultValue: ""
-        input "M3Sw1", "enum", title: "M3: Circuit 1 action:", defaultValue: 0,
+        input "M3Label", "text", title: "M3: Display Name:"
+        input "M3Sw1", "enum", title: "M3: Circuit 1 action:", 
         	options:[0:"No Change",
             		 1:"On",
             		 2:"Off"]
-        input "M3Sw2", "enum", title: "M3: Circuit 2 action:", defaultValue: 0,
+        input "M3Sw2", "enum", title: "M3: Circuit 2 action:", 
         	options:[0:"No Change",
             		 1:"On",
             		 2:"Off"]
-        input "M3Sw3", "enum", title: "M3: Circuit 3 action:", defaultValue: 0,
+        input "M3Sw3", "enum", title: "M3: Circuit 3 action:", 
         	options:[0:"No Change",
             		 1:"On",
             		 2:"Off"]
-        input "M3Sw4", "enum", title: "M3: Circuit 4 action:", defaultValue: 0,
+        input "M3Sw4", "enum", title: "M3: Circuit 4 action:", 
         	options:[0:"No Change",
             		 1:"On",
             		 2:"Off"]
-        input "M3Sw5", "enum", title: "M3: Circuit 5 action:", defaultValue: 0,
+        input "M3Sw5", "enum", title: "M3: Circuit 5 action:", 
         	options:[0:"No Change",
             		 1:"On",
             		 2:"Off"]
-        input "M3Mode", "enum", title: "M3: Mode to change to:", defaultValue: 0,
+        input "M3Mode", "enum", title: "M3: Mode to change to:", 
         	options:[0:"No change",
             		 1:"Pool",
                      2:"Pool & Set Temperature",
             		 3:"Spa",
                      4:"Spa & Set Temperature"]
-        input "M3Temp", "number", title: "M3: Set Temperature to:", range: "40..104", defaultValue: 40
-        input "M3VSP", "enum", title: "M3: Set VSP Speed to:", defaultValue: 0,
+        input "M3Temp", "number", title: "M3: Set Temperature to:", range: "40..104"
+        input "M3VSP", "enum", title: "M3: Set VSP Speed to:", 
         	options:[5:"No change",
             		 1:"Speed 1",
             		 2:"Speed 2",
@@ -270,54 +272,54 @@ metadata {
                      4:"Speed 4",
                      0:"Turn off"]
 //Mode 4
-        input "M4Label", "text", title: "M4: Display Name:", defaultValue: ""
-        input "M4Sw1", "enum", title: "M4: Circuit 1 action:", defaultValue: 0,
+        input "M4Label", "text", title: "M4: Display Name:"
+        input "M4Sw1", "enum", title: "M4: Circuit 1 action:", 
         	options:[0:"No Change",
             		 1:"On",
             		 2:"Off"]
-        input "M4Sw2", "enum", title: "M4: Circuit 2 action:", defaultValue: 0,
+        input "M4Sw2", "enum", title: "M4: Circuit 2 action:", 
         	options:[0:"No Change",
             		 1:"On",
             		 2:"Off"]
-        input "M4Sw3", "enum", title: "M4: Circuit 3 action:", defaultValue: 0,
+        input "M4Sw3", "enum", title: "M4: Circuit 3 action:", 
         	options:[0:"No Change",
             		 1:"On",
             		 2:"Off"]
-        input "M4Sw4", "enum", title: "M4: Circuit 4 action:", defaultValue: 0,
+        input "M4Sw4", "enum", title: "M4: Circuit 4 action:", 
         	options:[0:"No Change",
             		 1:"On",
             		 2:"Off"]
-        input "M4Sw5", "enum", title: "M4: Circuit 5 action:", defaultValue: 0,
+        input "M4Sw5", "enum", title: "M4: Circuit 5 action:", 
         	options:[0:"No Change",
             		 1:"On",
             		 2:"Off"]
-        input "M4Mode", "enum", title: "M4: Mode to change to:", defaultValue: 0,
+        input "M4Mode", "enum", title: "M4: Mode to change to:", 
         	options:[0:"No change",
             		 1:"Pool",
                      2:"Pool & Set Temperature",
             		 3:"Spa",
                      4:"Spa & Set Temperature"]
-        input "M4Temp", "number", title: "M4: Set Temperature to:", range: "40..104", defaultValue: 40
-        input "M4VSP", "enum", title: "M4: Set VSP Speed to:", defaultValue: 0,
+        input "M4Temp", "number", title: "M4: Set Temperature to:", range: "40..104"
+        input "M4VSP", "enum", title: "M4: Set VSP Speed to:", 
         	options:[5:"No change",
             		 1:"Speed 1",
             		 2:"Speed 2",
             		 3:"Speed 3",
                      4:"Speed 4",
                      0:"Turn off"]
-        input "C1ColorEnabled", "enum", title: "Circuit 1 Color Light Enable:", defaultValue: 0,
+        input "C1ColorEnabled", "enum", title: "Circuit 1 Color Light Enable:", 
         	options:[0:"off",
             		 1:"On"]
-        input "C2ColorEnabled", "enum", title: "Circuit 2 Color Light Enable:", defaultValue: 0,
+        input "C2ColorEnabled", "enum", title: "Circuit 2 Color Light Enable:", 
         	options:[0:"off",
             		 1:"On"]
-        input "C3ColorEnabled", "enum", title: "Circuit 3 Color Light Enable:", defaultValue: 0,
+        input "C3ColorEnabled", "enum", title: "Circuit 3 Color Light Enable:", 
         	options:[0:"off",
             		 1:"On"]
-        input "C4ColorEnabled", "enum", title: "Circuit 4 Color Light Enable:", defaultValue: 0,
+        input "C4ColorEnabled", "enum", title: "Circuit 4 Color Light Enable:", 
         	options:[0:"off",
             		 1:"On"]
-        input "C5ColorEnabled", "enum", title: "Circuit 5 Color Light Enable:", defaultValue: 0,
+        input "C5ColorEnabled", "enum", title: "Circuit 5 Color Light Enable:", 
         	options:[0:"off",
             		 1:"On"]
     }
