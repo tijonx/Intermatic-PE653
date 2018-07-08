@@ -3,6 +3,7 @@
  *
  *  Original Copyright 2014 bigpunk6
  *  Updated 2017 KeithR26
+ *  Updated 2018 Tijonx
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
  *  in compliance with the License. You may obtain a copy of the License at:
@@ -189,7 +190,7 @@ metadata {
                      2:"Pool & Set Temperature",
             		 3:"Spa",
                      4:"Spa & Set Temperature"]
-        input "M1Temp", "number", title: "M1: Set Temperature to:", range: "40..104"
+        input "M1Temp", "number", title: "M1: Set Temperature to:", range: "4..40"
         input "M1VSP", "enum", title: "M1: Set VSP Speed to:", 
         	options:[5:"No change",
             		 1:"Speed 1",
@@ -225,7 +226,7 @@ metadata {
                      2:"Pool & Set Temperature",
             		 3:"Spa",
                      4:"Spa & Set Temperature"]
-        input "M2Temp", "number", title: "M2: Set Temperature to:", range: "40..104"
+        input "M2Temp", "number", title: "M2: Set Temperature to:", range: "4..40"
         input "M2VSP", "enum", title: "M2: Set VSP Speed to:", 
         	options:[5:"No change",
             		 1:"Speed 1",
@@ -261,7 +262,7 @@ metadata {
                      2:"Pool & Set Temperature",
             		 3:"Spa",
                      4:"Spa & Set Temperature"]
-        input "M3Temp", "number", title: "M3: Set Temperature to:", range: "40..104"
+        input "M3Temp", "number", title: "M3: Set Temperature to:", range: "4..40"
         input "M3VSP", "enum", title: "M3: Set VSP Speed to:", 
         	options:[5:"No change",
             		 1:"Speed 1",
@@ -297,7 +298,7 @@ metadata {
                      2:"Pool & Set Temperature",
             		 3:"Spa",
                      4:"Spa & Set Temperature"]
-        input "M4Temp", "number", title: "M4: Set Temperature to:", range: "40..104"
+        input "M4Temp", "number", title: "M4: Set Temperature to:", range: "4..40"
         input "M4VSP", "enum", title: "M4: Set VSP Speed to:", 
         	options:[5:"No change",
             		 1:"Speed 1",
@@ -356,13 +357,13 @@ metadata {
 					]
 		}
         
-        controlTile("poolSliderControl", "device.poolSetpoint", "slider", width: 4, height: 1, inactiveLabel: false, range:"(40..104)") {
+        controlTile("poolSliderControl", "device.poolSetpoint", "slider", width: 4, height: 1, inactiveLabel: false, range:"(4..40)") {
 			state "PoolSetpoint", action:"quickSetPool", backgroundColor:"#d04e00"
 		}
 		valueTile("poolSetpoint", "device.poolSetpoint", width: 2, height: 1, inactiveLabel: false, decoration: "flat") {
 			state "pool", label:'pool ${currentValue}°', backgroundColor:"#ffffff"
 		}
-		controlTile("spaSliderControl", "device.spaSetpoint", "slider", width: 4, height: 1, inactiveLabel: false, range:"(40..104)") {
+		controlTile("spaSliderControl", "device.spaSetpoint", "slider", width: 4, height: 1, inactiveLabel: false, range:"(4..40)") {
 			state "SpaSetpoint", action:"quickSetSpa", backgroundColor: "#1e9cbb"
 		}
 		valueTile("spaSetpoint", "device.spaSetpoint", width: 2, height: 1, inactiveLabel: false, decoration: "flat") {
@@ -392,63 +393,35 @@ metadata {
 			state "turningOff", label: 'changing',   action: "spa",         icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/Pool.png", backgroundColor: "#ffffff", nextState: "turningOn"
 			state "disabled",   label:'',            icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/all-white.png", backgroundColor: "#ffffff"
 		}
-		standardTile("switch1", "device.switch1", width: 1, height: 1, decoration: "flat") {
-			state "on",         label: "on",         action: "off1", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/sw1-on.png",  backgroundColor: "#79b821", nextState: "turningOff"
-			state "off",        label: "off",        action: "on1",  icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/sw1-off.png", backgroundColor: "#ffffff", nextState: "turningOn"
-			state "turningOn",  label:'Turning on',  action: "off1", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/sw1-on.png",  backgroundColor: "#79b821", nextState: "turningOff"
-			state "turningOff", label:'Turning off', action: "on1",  icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/sw1-off.png", backgroundColor: "#ffffff", nextState: "turningOn"
+		standardTile("switch1", "device.switch1", width: 2, height: 2, decoration: "flat") {
+			state "on",         label: "Pump ON",         action: "off1",  backgroundColor: "#79b821", nextState: "turningOff"
+			state "off",        label: "Pump OFF",        action: "on1",  backgroundColor: "#ffffff", nextState: "turningOn"
+			state "turningOn",  label:'Turning on',  action: "off1", backgroundColor: "#79b821", nextState: "turningOff"
+			state "turningOff", label:'Turning off', action: "on1", backgroundColor: "#ffffff", nextState: "turningOn"
 		}
-        standardTile("switch2", "device.switch2", width: 1, height: 1, decoration: "flat") {
+        standardTile("switch2", "device.switch2", width: 2, height: 2, decoration: "flat") {
 			state "on",         label: "on",         action: "off2", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/sw2-on.png",  backgroundColor: "#79b821", nextState: "turningOff"
 			state "off",        label: "off",        action: "on2",  icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/sw2-off.png", backgroundColor: "#ffffff", nextState: "turningOn"
 			state "turningOn",  label:'Turning on',  action: "off2", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/sw2-on.png",  backgroundColor: "#79b821", nextState: "turningOff"
 			state "turningOff", label:'Turning off', action: "on2",  icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/sw2-off.png", backgroundColor: "#ffffff", nextState: "turningOn"
 		}
-        standardTile("switch3", "device.switch3", width: 1, height: 1, decoration: "flat") {
-			state "on",         label: "on",         action: "off3", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/sw3-on.png",  backgroundColor: "#79b821", nextState: "turningOff"
-			state "off",        label: "off",        action: "on3",  icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/sw3-off.png", backgroundColor: "#ffffff", nextState: "turningOn"
-			state "turningOn",  label:'Turning on',  action: "off3", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/sw3-on.png",  backgroundColor: "#79b821", nextState: "turningOff"
-			state "turningOff", label:'Turning off', action: "on3",  icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/sw3-off.png", backgroundColor: "#ffffff", nextState: "turningOn"
+        standardTile("switch3", "device.switch3", width: 2, height: 2, decoration: "flat") {
+			state "on",         label: "Squirtle ON",         action: "off3", backgroundColor: "#79b821", nextState: "turningOff"
+			state "off",        label: "Squirtle OFF",        action: "on3",   backgroundColor: "#ffffff", nextState: "turningOn"
+			state "turningOn",  label:'Turning on',  action: "off3",  backgroundColor: "#79b821", nextState: "turningOff"
+			state "turningOff", label:'Turning off', action: "on3",  backgroundColor: "#ffffff", nextState: "turningOn"
 		}
-        standardTile("switch4", "device.switch4", width: 1, height: 1, decoration: "flat") {
-			state "on",         label: "on",         action: "off4", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/sw4-on.png",  backgroundColor: "#79b821", nextState: "turningOff"
-			state "off",        label: "off",        action: "on4",  icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/sw4-off.png", backgroundColor: "#ffffff", nextState: "turningOn"
-			state "turningOn",  label:'Turning on',  action: "off4", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/sw4-on.png",  backgroundColor: "#79b821", nextState: "turningOff"
-			state "turningOff", label:'Turning off', action: "on4",  icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/sw4-off.png", backgroundColor: "#ffffff", nextState: "turningOn"
+        standardTile("switch4", "device.switch4", width: 2, height: 2, decoration: "flat") {
+			state "on",         label: "Chlore ON",         action: "off4", backgroundColor: "#79b821", nextState: "turningOff"
+			state "off",        label: "Chlore OFF",        action: "on4",  backgroundColor: "#ffffff", nextState: "turningOn"
+			state "turningOn",  label:'Turning on',  action: "off4",  backgroundColor: "#79b821", nextState: "turningOff"
+			state "turningOff", label:'Turning off', action: "on4",  backgroundColor: "#ffffff", nextState: "turningOn"
 		}
-        standardTile("switch5", "device.switch5", width: 1, height: 1, decoration: "flat") {
+        standardTile("switch5", "device.switch5", width: 2, height: 2, decoration: "flat") {
 			state "on",         label: "on",         action: "off5", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/sw5-on.png",  backgroundColor: "#79b821", nextState: "turningOff"
 			state "off",        label: "off",        action: "on5",  icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/sw5-off.png", backgroundColor: "#ffffff", nextState: "turningOn"
 			state "turningOn",  label:'Turning on',  action: "off5", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/sw5-on.png",  backgroundColor: "#79b821", nextState: "turningOff"
 			state "turningOff", label:'Turning off', action: "on5",  icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/sw5-off.png", backgroundColor: "#ffffff", nextState: "turningOn"
-		}
-        standardTile("swVSP1", "device.swVSP1", width: 1, height: 1, decoration: "flat") {
-			state "off",        label: "off",        action: "setVSPSpeed1", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/vsp1-off.png", backgroundColor: "#ffffff", nextState: "turningOn"
-			state "on",         label: "on",         action: "setVSPSpeed0", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/vsp1-on.png",  backgroundColor: "#79b821", nextState: "turningOff"
-			state "turningOn",  label:'Turning on',  action: "setVSPSpeed0", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/vsp1-on.png",  backgroundColor: "#79b821", nextState: "turningOff"
-			state "turningOff", label:'Turning off', action: "setVSPSpeed1", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/vsp1-off.png", backgroundColor: "#ffffff", nextState: "turningOn"
-			state "disabled",   label:'',                                    icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/all-white.png",backgroundColor: "#ffffff"
-		}
-        standardTile("swVSP2", "device.swVSP2", width: 1, height: 1, decoration: "flat") {
-			state "off",        label: "off",        action: "setVSPSpeed2", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/vsp2-off.png", backgroundColor: "#ffffff", nextState: "turningOn"
-			state "on",         label: "on",         action: "setVSPSpeed0", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/vsp2-on.png",  backgroundColor: "#79b821", nextState: "turningOff"
-			state "turningOn",  label:'Turning on',  action: "setVSPSpeed0", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/vsp2-on.png",  backgroundColor: "#79b821", nextState: "turningOff"
-			state "turningOff", label:'Turning off', action: "setVSPSpeed2", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/vsp2-off.png", backgroundColor: "#ffffff", nextState: "turningOn"
-			state "disabled",   label:'',                                    icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/all-white.png",backgroundColor: "#ffffff"
-		}
-        standardTile("swVSP3", "device.swVSP3", width: 1, height: 1, decoration: "flat") {
-			state "off",        label: "off",        action: "setVSPSpeed3", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/vsp3-off.png", backgroundColor: "#ffffff", nextState: "turningOn"
-			state "on",         label: "on",         action: "setVSPSpeed0", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/vsp3-on.png",  backgroundColor: "#79b821", nextState: "turningOff"
-			state "turningOn",  label:'Turning on',  action: "setVSPSpeed0", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/vsp3-on.png",  backgroundColor: "#79b821", nextState: "turningOff"
-			state "turningOff", label:'Turning off', action: "setVSPSpeed3", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/vsp3-off.png", backgroundColor: "#ffffff", nextState: "turningOn"
-			state "disabled",   label:'',                                    icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/all-white.png",backgroundColor: "#ffffff"
-		}
-        standardTile("swVSP4", "device.swVSP4", width: 1, height: 1, decoration: "flat") {
-			state "off",        label: "off",        action: "setVSPSpeed4", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/vsp4-off.png", backgroundColor: "#ffffff", nextState: "turningOn"
-			state "on",         label: "on",         action: "setVSPSpeed0", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/vsp4-on.png",  backgroundColor: "#79b821", nextState: "turningOff"
-			state "turningOn",  label:'Turning on',  action: "setVSPSpeed0", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/vsp4-on.png",  backgroundColor: "#79b821", nextState: "turningOff"
-			state "turningOff", label:'Turning off', action: "setVSPSpeed4", icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/vsp4-off.png", backgroundColor: "#ffffff", nextState: "turningOn"
-			state "disabled",   label:'',                                    icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/all-white.png",backgroundColor: "#ffffff"
 		}
         standardTile("swM1", "device.swM1", width: 1, height: 1, decoration: "flat") {
 			state "disabled",   label:'',            action: "setMode1",     icon: "https://raw.githubusercontent.com/KeithR26/Intermatic-PE653/master/M1-off.png",backgroundColor: "#ffffff", nextState: "disabled"
@@ -489,16 +462,12 @@ metadata {
         
 	main "mainTile"
         details([
-            "blank1",
-            "switch1","switch2","switch3","switch4","switch5",
+            "switch1","switch3","switch4",
             "poolSpaMode",
         	"temperatureTile",
-            "swVSP1","swVSP2","swVSP3","swVSP4",
+            "refresh",
             "swM1", "M1Name", "swM2", "M2Name", "swM3", "M3Name", "swM4", "M4Name",
-			"poolSliderControl", "poolSetpoint", "spaSliderControl", "spaSetpoint",
-//            "pumpSpeedSliderControl", "pumpSpeed",
-            "configure","refresh", "blank2",
-            "lightColorSliderControl","lightColor"])
+			"poolSliderControl", "poolSetpoint"])
 	}
 }
 
